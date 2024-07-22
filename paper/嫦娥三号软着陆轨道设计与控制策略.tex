@@ -1,0 +1,184 @@
+\documentclass{ctexart}
+
+\usepackage{appendix}
+\usepackage{listings}% 插入代码
+\usepackage{xcolor} 
+\usepackage{graphicx}% 插入表格/图片
+\usepackage{booktabs} % 绘制表格
+\usepackage{caption} % 标题
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{subfigure} % 插入图片
+\usepackage{longtable}
+\usepackage{abstract}% 摘要
+\pagestyle{plain} % 页眉消失
+\usepackage{setspace}
+\usepackage{multirow}% 表格
+\usepackage{diagbox}
+\usepackage{enumerate}% 序号
+\usepackage{float}% 固定图片或表格的位置
+\usepackage{gensymb}
+\usepackage{microtype}
+
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=2cm,bottom=2cm}% 页边距
+\lstset{
+    numbers=left, % 设置行号位置
+    numberstyle=\tiny, % 设置行号大小
+    keywordstyle=\color{blue}, % 设置关键字颜色
+    commentstyle=\color[cmyk]{1,0,1,0}, % 设置注释颜色
+    escapeinside=``, % 逃逸字符(1左面的键)，用于显示中文
+    breaklines, % 自动折行
+    extendedchars=false, % 解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=1em,xrightmargin=1em, aboveskip=1em, % 设置边距
+    tabsize=4, % 设置tab空格数
+    showspaces=false % 不显示空格
+}
+
+\title{嫦娥三号软着陆轨道设计与控制策略}
+\date{}
+\author{}
+
+\begin{document}
+\maketitle
+\renewcommand{\abstractname}{\Large\textbf{摘要}\\} % 使用 \huge 调整字体大小
+\vspace{-4em} % 调整标题上间距
+\begin{abstract}
+\normalsize
+本文针对问题，建立了等多种模型，解决了问题。
+
+针对问题一，
+
+针对问题二，
+
+针对问题三，
+
+\textbf{关键字}：
+\end{abstract}
+\newpage
+
+
+
+% 重新设置页面边距
+    \newgeometry{a4paper,left=3.18cm,right=3.18cm,top=2.54cm,bottom=2.54cm}
+	\section{问题背景与重述}
+	\subsection{问题背景}
+    嫦娥三号于2013年12月2日1时30分成功发射，12月6日抵达月球轨道。嫦娥三号在着陆准备轨道上的运行质量为2.4t，其安装在下部的主减速发动机能够产生1500N到7500N的可调节推力，其比冲（即单位质量的推进剂产生的推力）为2940m/s，可以满足调整速度的控制要求。在四周安装有姿态调整发动机，在给定主减速发动机的推力方向后，能够自动通过多个发动机的脉冲组合实现各种姿态的调整控制。嫦娥三号的预定着陆点为19.51W，44.12N，海拔为-2641m（见附件1）。
+
+嫦娥三号在高速飞行的情况下，要保证准确地在月球预定区域内实现软着陆，关键问题是着陆轨道与控制策略的设计。其着陆轨道设计的基本要求：着陆准备轨道为近月点15km，远月点100km的椭圆形轨道；着陆轨道为从近月点至着陆点，其软着陆过程共分为6个阶段（见附件2），要求满足每个阶段在关键点所处的状态；尽量减少软着陆过程的燃料消耗。
+    \subsection{问题表述}
+    \begin{enumerate}[(1)]
+        \item 问题一：确定着陆准备轨道近月点和远月点的位置，以及嫦娥三号相应速度的大小与方向。
+        \item 问题二：确定嫦娥三号的着陆轨道和在6个阶段的最优控制策略。
+        \item 问题三：对于你们设计的着陆轨道和控制策略做相应的误差分析和敏感性分析。
+    \end{enumerate}
+
+    \section{问题分析}
+    \subsection{问题一分析}
+    对于问题一
+    \subsection{问题二分析}
+    首先
+    \subsection{问题三分析}
+    对于该问题
+    \section{模型假设}
+    \begin{enumerate}[(1)]
+        \item 
+        \item 
+        \item 不考虑
+        \item 假设
+    \end{enumerate}
+
+    \section{符号说明}
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{ccc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{符号} & \textbf{意义} & \textbf{单位}\\
+            \midrule  % 设置中间横线
+            \textnormal{} & \textnormal{} & \textnormal{}\\
+            \textbf{符号} & \textbf{意义} & \textbf{单位}\\
+            \textnormal{} & \textnormal{} & \textnormal{}\\
+            \textbf{符号} & \textbf{意义} & \textbf{单位}\\
+
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
+
+    \section{模型建立与求解}
+    \subsection{问题一模型的建立与求解}
+    \subsubsection{问题一模型的建立}
+针对这一问题建立了多种优化模型，
+    
+    \subsubsection{数据预处理}
+	
+考虑到
+
+	\subsubsection{计算}
+	\subsubsection{结果的检验}
+	\subsubsection{问题的结论}
+    \subsection{问题二模型的建立与求解}
+
+
+\subsubsection{问题一的模型建立与求解}
+\subsubsection{数据预处理}
+\subsubsection{模型建立}
+\subsubsection{模型建立的数学思想}
+\subsubsection{模型建立的准备}
+\subsubsection{模型的求解}
+\subsubsection{模型求解的数学原理}
+\subsubsection{模型求解的准备}
+\subsubsection{模型求解的过程}
+\subsubsection{模型求解的结果}
+\subsubsection{结果的检验}
+\subsubsection{问题的结论}
+\subsubsection{模型检验与分析}
+\subsubsection{误差分析}
+\subsubsection{灵敏度分析}
+\subsubsection{稳定性分析}
+\subsubsection{小结}
+    \subsection{问题三模型的建立与求解}
+\subsubsection{数据预处理}
+\subsubsection{模型建立}
+\subsubsection{模型建立的数学思想}
+\subsubsection{模型建立的准备}
+\subsubsection{模型的求解}
+\subsubsection{模型求解的数学原理}
+\subsubsection{模型求解的准备}
+\subsubsection{模型求解的过程}
+\subsubsection{模型求解的结果}
+\subsubsection{结果的检验}
+\subsubsection{问题的结论}
+\subsubsection{模型检验与分析}
+\subsubsection{误差分析}
+\subsubsection{灵敏度分析}
+\subsubsection{稳定性分析}
+\subsubsection{小结}
+    \subsection{问题四模型的建立与求解}
+\subsubsection{数据预处理}
+\subsubsection{模型建立}
+\subsubsection{模型建立的数学思想}
+\subsubsection{模型建立的准备}
+\subsubsection{模型的求解}
+\subsubsection{模型求解的数学原理}
+\subsubsection{模型求解的准备}
+\subsubsection{模型求解的过程}
+\subsubsection{模型求解的结果}
+\subsubsection{结果的检验}
+\subsubsection{问题的结论}
+\subsubsection{模型检验与分析}
+\subsubsection{误差分析}
+\subsubsection{灵敏度分析}
+\subsubsection{稳定性分析}
+\subsubsection{小结}
+    \begin{thebibliography}{9} % 参考文献
+		\bibitem{bib:8}何晓群.多元统计分析.北京：中国人民大学出版社，2012.
+		\bibitem{bib:9}徐维超. 相关系数研究综述[J]. 广东工业大学学报,2012,29(3):12-17.
+    \end{thebibliography}
+
+    \newpage
+    \section{附录}
+    %插入代码内容
+\begin{lstlisting}
+		\end{lstlisting}
+\end{document}       
