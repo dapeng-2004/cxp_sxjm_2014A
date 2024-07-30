@@ -45,17 +45,17 @@
 \vspace{-4em} % 调整标题上间距
 \begin{abstract}
 \normalsize
-本文针对嫦娥三号软着陆轨道设计与控制策略这一问题，建立了动力学微分方程，差分方程，着陆点选择模型，误差分析模型等多种模型，解决了最优着陆轨道选取及控制问题。
+本文针对嫦娥三号软着陆轨道设计与控制策略问题，建立了嫦娥三号的动力学微分方程和差分方程，着陆点选择模型与误差分析模型，解决了最优着陆轨道选取及控制问题。
 
-针对问题一，提取关于月球与嫦娥三号的参数，再根据所给椭圆轨道和月球位置，利用万有引力定律，计算出嫦娥三号在轨道近月点和远月点的轨道速度和方向。之后再建立嫦娥三号在主减速阶段的动力学方程，将油耗最小作为优化目标，结合始末状态的参数作为约束条件，离散求解\textbf{微分方程}，即得降落轨道的数值解：近月点速度$v_p = 1692.20 \, \text{m/s}$，远月点速度
+针对问题一，提取关于月球与嫦娥三号的参数，根据所给椭圆轨道和月球位置，利用万有引力定律，计算出嫦娥三号在轨道近月点和远月点的轨道速度和方向。之后再建立嫦娥三号在主减速阶段的动力学方程，将油耗最小作为优化目标，结合始末状态的参数作为约束条件，离散求解\textbf{微分方程}，即得降落轨道的数值解：近月点速度$v_p = 1692.20 \, \text{m/s}$，远月点速度
 $v_a = 1613.90 \, \text{m/s}$，近月点经纬度为（19.41°W,31.48°N），远月点经纬度为（160.59°E,31.48°S）。
 
 针对问题二，根据题意可分为六个阶段，首先对主减速阶段和快速调整阶段建立物理模型，以油耗最小作为优化目标，结合每一阶段始末状态的参数作为约束条件，离散求解动力学微分方程，对推力方向和速度方向进行搜索，得出最优推力方向的夹角，求解油耗最低的着陆策略，前两阶段最终油耗为1104.563\(kg\)。
 其次在粗避障阶段，先选取着陆点，首先对高程图进行\textbf{高斯滤波}平滑处理，接下来进行梯度计算，将数据分块计算平均梯度，降低计算复杂度，能够分析局部区域的特性，并反转其灰度值，综合考虑地区平坦程度与油耗大小，创建\textbf{径向衰减掩码}并应用到反转的梯度图上，最后对掩码后的平均梯度进行排序，得出最佳着陆点为(1122.5 1142.5)。在精避障阶段，将始末状态的参数作为约束条件，离散求解动力学微分方程，当前阶段末速度：15.274\(m/s\)，精避障阶段末质量：1251.483\(kg\)，当前燃油消耗质量：1148.517\(kg\)，当前阶段末高度：30.092\(m\)，最终在经过缓速下降与自由落体阶段，总着陆时间：533.179\(s\)，自由落体阶段末质量：1242.592\(kg\)，总燃油消耗质量：1157.405\(kg\)。
 
-针对问题三，将误差分为两个部分：物理误差与控制误差。综合考虑地球重力场与基于行星历表的其他星体引力场，太阳光压与大气模型，质量瘤影响，固体潮效应和相对论效应，分别计算可能的误差情况并计算哪些误差影响，重要性排序为质量瘤引力变化，太阳引力，地球引力，木星引力，大气阻力，相对论效应引力，固体潮引力。并综合考虑求解精度影响和发动机推力控制误差与着陆准备轨道的参数误差，得出初始值对于最终结果的影响。最终进行对于初始值的敏感性分析，并利用\textbf{蒙特卡罗方法}得出仿真结果，发现降落点集中在一定区域内，得出敏感性较好。
+针对问题三，将误差分为两个部分：\textbf{物理误差与控制误差}。综合考虑地球重力场与基于行星历表的其他星体引力场，太阳光压与大气模型，质量瘤影响，固体潮效应和相对论效应等物理误差，分别计算可能的误差情况并计算哪些误差影响，重要性排序为质量瘤引力变化，太阳引力，地球引力，木星引力，大气阻力，相对论效应引力，固体潮引力。并综合考虑求解精度影响和发动机推力控制误差与着陆准备轨道的参数误差等控制误差，得出初始值对于最终结果的影响。最终进行对于初始值的敏感性分析，并利用\textbf{蒙特卡罗方法}得出仿真结果，发现降落点集中在一定区域内，得出敏感性较好。
 
-\textbf{关键词}：动力学微分方程，差分方程，着陆点选择模型，误差分析模型
+\textbf{关键词}：动力学\  \ 微分方程\  \ 差分方程\  \ 径向衰减掩码\  \ 蒙特卡罗方法
 \end{abstract}
 \newpage
 
@@ -93,7 +93,7 @@ $v_a = 1613.90 \, \text{m/s}$，近月点经纬度为（19.41°W,31.48°N），�
         \item 降落过程中，轨道都满足是开普勒轨道，忽略摄动。
         \item 距离微小时，使用姿态调整发动机，不必使用主发动机。
         \item 使用月球平均半径。
-        \item 不考虑月球自传。
+        \item 不考虑月球自转。
     \end{enumerate}
 
     \section{符号说明}
@@ -125,11 +125,11 @@ $v_a = 1613.90 \, \text{m/s}$，近月点经纬度为（19.41°W,31.48°N），�
     \subsubsection{笛卡尔坐标系的建立}
 以月球中心为原点，构建一个三维笛卡尔坐标系，其三个坐标轴分别为：
 
-\begin{itemize}
+\begin{enumerate}
     \item \(X\) 轴：指向月球赤道平面与月球自转轴的交点方向，该方向与地球中心连线的方向重合。
     \item \(Y\) 轴：垂直于 \(X\) 轴，并且位于月球赤道平面内，与 \(X\) 轴构成一个直角平面。
     \item \(Z\) 轴：沿着月球自转轴指向北极。
-\end{itemize}
+\end{enumerate}
 
 在该坐标系下，月球表面任意一点的位置可以用 \((X, Y, Z)\) 三个坐标值表示，这些值可以通过月面测量数据或卫星观测数据确定。这个坐标系不仅有助于定位月球表面特征（如陨石坑、山脉等），还可以用于分析月球探测器的轨道和运动状态。
 
@@ -152,6 +152,7 @@ $v_a = 1613.90 \, \text{m/s}$，近月点经纬度为（19.41°W,31.48°N），�
 F_{\text{引}} = G \frac{M_1 M_2}{r^2}
 \label{eq:gravity}
 \end{equation}
+
 其中，\( F_{\text{引}}\) 表示两个质量分别为 \( M_1 \) 和 \( M_2 \) 的物体之间的引力，两个物体间距离为 \( r \)。\( G \) 是引力常数，其值约为 
 
 \[
@@ -288,13 +289,8 @@ F_{\text{thrust}} = v_e \dot{m}
 \end{equation}
 
 % 运动方程和燃料消耗方程的详细介绍
-\begin{itemize}
-\item 这些方程表示物体在推力和引力作用下的运动：
-\item 第一个方程表示 $x$ 方向的加速度，其由引力和推力的 $x$ 分量决定。
-\item 第二个方程表示 $y$ 方向的加速度，其由引力和推力的 $y$ 分量决定。
-\item 第三个方程表示质量随时间的变化，即燃料消耗率。
-\item 第四个和第五个方程表示速度与位置的关系。
-\end{itemize}
+这些方程表示物体在推力和引力作用下的运动：第一个方程表示 $x$ 方向的加速度，其由引力和推力的 $x$ 分量决定,第二个方程表示 $y$ 方向的加速度，其由引力和推力的 $y$ 分量决定。第三个方程表示质量随时间的变化，即燃料消耗率。第四个和第五个方程表示速度与位置的关系。
+
 
 % 初始状态
 初始状态：
@@ -328,9 +324,11 @@ y(t_1) = 3000 \, \text{m} \\
 \end{equation}
 
 % 末状态的详细介绍
+% 使用自定义的itemize环境来去掉黑点
 \begin{itemize}
-\item $y(t_1)$ 表示最终时刻的位置。
-\item $\sqrt{v_t(t_1)^2 + v_n(t_1)^2}$ 表示最终时刻的速度大小。
+    \renewcommand\labelitemi{} % 去掉项目符号
+    \item $y(t_1)$ 表示最终时刻的位置。
+    \item $\sqrt{v_t(t_1)^2 + v_n(t_1)^2}$ 表示最终时刻的速度大小。
 \end{itemize}
 
 	\subsubsection{主减速阶段的优化}
@@ -342,12 +340,14 @@ m_{\text{燃}} = \int_0^{t_1} \frac{F}{v_e} \, dt
 \end{equation}
 
 % 目标函数的详细介绍
+% 使用自定义的itemize环境来去掉黑点
 \begin{itemize}
-\item 这个公式表示燃料消耗的目标函数，其中：
-\item $m_{\text{燃}}$ 是总燃料消耗量。
-\item $F$ 是推力，取7500\(N\)。
-\item $v_e$ 是以米/秒为单位的比冲。
-\item 积分的上下限是从初始时间 $0$ 到最终时间 $t_1$。
+    \renewcommand\labelitemi{} % 去掉项目符号
+    \item 这个公式表示燃料消耗的目标函数，其中：
+    \item $m_{\text{燃}}$ 是总燃料消耗量。
+    \item $F$ 是推力，取7500\(N\)。
+    \item $v_e$ 是以米/秒为单位的比冲。
+    \item 积分的上下限是从初始时间 $0$ 到最终时间 $t_1$。
 \end{itemize}
 
 嫦娥三号到月球中心的距离\(r\)关于飞行时间\(t\)的差分方程为
@@ -382,15 +382,22 @@ a_t = a_g + a_n
 \]
 
 	\subsubsection{着陆准备轨道的计算结果}
-主减速阶段飞行时间：414.915\(s\)
-
-主减速阶段末速度：56.998\(m/s\)
-
-飞船主减速阶段末质量：1341.543\(kg\)
-
-主减速阶段燃油消耗质量：1058.457\(kg\)
-
-飞船主减速阶段末高度：2997.319\(m\)
+着陆准备轨道的参数如下：
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{cc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{参数} & \textbf{值} \\
+            \midrule  % 设置中间横线
+            主减速阶段飞行时间 & 414.915 \(s\) \\
+            主减速阶段末速度 & 56.998 \(m/s\) \\
+            飞船主减速阶段末质量 & 1341.543 \(kg\) \\
+            主减速阶段燃油消耗质量 & 1058.457 \(kg\) \\
+            飞船主减速阶段末高度 & 2997.319 \(m\) \\
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
 
     \begin{figure}[H] % [H] 表示强制当前位置插入图片
         \centering % 使图片居中
@@ -509,6 +516,7 @@ y(t_2) = 2400 \, \text{m} \\
 
 % 末状态的详细介绍
 \begin{itemize}
+    \renewcommand\labelitemi{} % 去掉项目符号
 \item $y(t_2)$ 表示最终时刻的位置。
 \item ${v_t(t_2)}$ 表示最终时刻的速度水平速度大小。
 \end{itemize}
@@ -519,18 +527,23 @@ y(t_2) = 2400 \, \text{m} \\
         \caption{快速调整阶段示意图} % 图片标题
         \label{fig:example} % 图片标签
     \end{figure}
-
-总飞行时间：458.494\(s\)
-
-当前阶段末速度：4.283\(m/s\)
-
-当前阶段末水平速度：0.0999\(m/s\)
-
-快速调整阶段末质量：1295.437\(kg\)
-
-总燃油消耗质量：1104.563\(kg\)
-
-当前阶段末高度：2397.449\(m\)
+快速调整阶段参数如下：
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{cc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{参数} & \textbf{值} \\
+            \midrule  % 设置中间横线
+            总飞行时间 & 458.494 \(s\) \\
+            当前阶段末速度 & 4.283 \(m/s\) \\
+            当前阶段末水平速度 & 0.0999 \(m/s\) \\
+            快速调整阶段末质量 & 1295.437 \(kg\) \\
+            总燃油消耗质量 & 1104.563 \(kg\) \\
+            当前阶段末高度 & 2397.449 \(m\) \\
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
 
 \subsubsection{图片预处理}
 \textbf{高斯平滑}：
@@ -643,6 +656,7 @@ y(t_4) = 101.703 \, \text{m} \\
 
 % 末状态的详细介绍
 \begin{itemize}
+    \renewcommand\labelitemi{} % 去掉项目符号
 \item $y(t_4)$ 表示最终时刻的位置。
 \item $\sqrt{v_t(t_4)^2 + v_n(t_4)^2}$ 表示最终时刻的速度水平速度大小。
 \end{itemize}
@@ -653,16 +667,22 @@ y(t_4) = 101.703 \, \text{m} \\
         \caption{粗避障阶段示意图} % 图片标题
         \label{fig:example} % 图片标签
     \end{figure}
-
-总飞行时间：518.317\(s\)
-
-当前阶段末速度：1.073\(m/s\)
-
-粗避障阶段末质量：1251.483\(kg\)
-
-总燃油消耗质量：1148.571\(kg\)
-
-当前阶段末高度：101.703\(m\)
+粗避障阶段参数如下：
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{cc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{参数} & \textbf{值} \\
+            \midrule  % 设置中间横线
+            总飞行时间 & 518.317 \(s\) \\
+            当前阶段末速度 & 1.073 \(m/s\) \\
+            粗避障阶段末质量 & 1251.483 \(kg\) \\
+            总燃油消耗质量 & 1148.571 \(kg\) \\
+            当前阶段末高度 & 101.703 \(m\) \\
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
 \subsubsection{精避障阶段}
 
 目标函数：
@@ -711,6 +731,7 @@ v_t(t_5) = 0 \, \text{m/s}
 
 % 末状态的详细介绍
 \begin{itemize}
+\renewcommand\labelitemi{} % 去掉项目符号
 \item $y(t_5)$ 表示最终时刻的位置。
 \item $v_t(t_5)$ 表示最终时刻的速度水平速度大小。
 \end{itemize}
@@ -722,15 +743,22 @@ v_t(t_5) = 0 \, \text{m/s}
         \label{fig:example} % 图片标签
     \end{figure}
 
-总飞行时间：527.635\(s\)
-
-当前阶段末速度：15.274\(m/s\)
-
-粗避障阶段末质量：1251.483\(kg\)
-
-总燃油消耗质量：1148.517\(kg\)
-
-当前阶段末高度：30.092\(m\)
+精避障阶段参数如下：
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{cc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{参数} & \textbf{值} \\
+            \midrule  % 设置中间横线
+            总飞行时间 & 527.635 \(s\) \\
+            当前阶段末速度 & 15.274 \(m/s\) \\
+            粗避障阶段末质量 & 1251.483 \(kg\) \\
+            总燃油消耗质量 & 1148.517 \(kg\) \\
+            当前阶段末高度 & 30.092 \(m\) \\
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
 \subsubsection{缓慢下降与自由落体阶段}
 
 目标函数：
@@ -778,6 +806,7 @@ y(t_6) = 3.447 \, \text{m} \\
 
 % 末状态的详细介绍
 \begin{itemize}
+\renewcommand\labelitemi{} % 去掉项目符号
 \item $y(t_6)$ 表示最终时刻的位置。
 \item $\sqrt{v_t(t_6)^2 + v_n(t_6)^2}$ 表示最终时刻的速度大小，因为此时悬停，因此速度为0。
 \end{itemize}
@@ -789,26 +818,41 @@ y(t_6) = 3.447 \, \text{m} \\
         \label{fig:example} % 图片标签
     \end{figure}
 
-总飞行时间：531.119\(s\)
+缓慢下降阶段参数如下：
 
-当前阶段末速度：$3.7 \times 10^{-3} \, \text{m/s}$
-
-粗避障阶段末质量：1242.592\(kg\)
-
-总燃油消耗质量：1157.405\(kg\)
-
-当前阶段末高度：3.447\(m\)
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{cc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{参数} & \textbf{值} \\
+            \midrule  % 设置中间横线
+            总飞行时间 & 531.119 \(s\) \\
+            当前阶段末速度 & $3.7 \times 10^{-3} \, \text{m/s}$ \\
+            粗避障阶段末质量 & 1242.592 \(kg\) \\
+            总燃油消耗质量 & 1157.405 \(kg\) \\
+            当前阶段末高度 & 3.447 \(m\) \\
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
 
 由于缓慢下降阶段结束后，嫦娥三号悬停于目标上方并关闭了发动机，所以自由落体不消耗燃油。
 自由落体运动结束后，状态参数为
 
-总飞行时间：533.179\(s\)
-
-自由落体阶段末质量：1242.592\(kg\)
-
-总燃油消耗质量：1157.405\(kg\)
-
-当前阶段末高度：0\(m\)
+\begin{center}
+    \setlength{\tabcolsep}{9mm}{
+        \begin{tabular}{cc}
+            \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+            \textbf{参数} & \textbf{值} \\
+            \midrule  % 设置中间横线
+            总飞行时间 & 533.179 \(s\) \\
+            自由落体阶段末质量 & 1242.592 \(kg\) \\
+            总燃油消耗质量 & 1157.405 \(kg\) \\
+            当前阶段末高度 & 0 \(m\) \\
+            \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+        \end{tabular}
+    }
+\end{center}
 \subsubsection{问题的结论}
 嫦娥三号的软着陆过程，总耗时533.179\(s\)，总燃油消耗质量为1157.405\(kg\)。
     \subsection{问题三模型的建立与求解}
@@ -844,6 +888,7 @@ F = \frac{G M_1 M_2}{r^2}
 \]
 其中：
 \begin{itemize}
+	\renewcommand\labelitemi{} % 去掉项目符号		
     \item \( G \) 是引力常数，约为 \( 6.67430 \times 10^{-11} \, \text{m}^3 \, \text{kg}^{-1} \, \text{s}^{-2} \)
     \item \( M_1 \) 是地球的质量，约为 \( 5.972 \times 10^{24} \, \text{kg} \)
     \item \( M_2 \) 是飞行器的质量，约为 \( 2400 \, \text{kg} \)
@@ -916,21 +961,29 @@ F \approx 2.72 \, \text{N}
 
 飞船推力 \( T = 7500 \, \text{N} \)
 
-\[
-\text{太阳引力相对于飞船推力的影响百分比} = \frac{F_{\text{sun}}}{T} \times 100\% = \frac{28.45}{7500} \times 100\% \approx 0.38\%
-\]
+% 太阳引力相对于飞船推力的影响百分比
+\text{太阳引力相对于飞船推力的影响百分比:}
+\begin{equation*}
+P_{\text{sun, thrust}} = \frac{F_{\text{sun}}}{T} \times 100\% = \frac{28.45}{7500} \times 100\% \approx 0.38\%
+\end{equation*}
 
-\[
-\text{太阳引力相对于月球引力的影响百分比} = \frac{F_{\text{sun}}}{F_{\text{moon}}} \times 100\% = \frac{28.45}{7685.18} \times 100\% \approx 0.37\%
-\]
+% 太阳引力相对于月球引力的影响百分比
+\text{太阳引力相对于月球引力的影响百分比:}
+\begin{equation*}
+P_{\text{sun, moon}} = \frac{F_{\text{sun}}}{F_{\text{moon}}} \times 100\% = \frac{28.45}{7685.18} \times 100\% \approx 0.37\%
+\end{equation*}
 
-\[
-\text{木星引力相对于飞船推力的影响百分比} = \frac{F_{\text{jupiter}}}{T} \times 100\% = \frac{0.001}{7500} \times 100\% \approx 0.000013\%
-\]
+% 木星引力相对于飞船推力的影响百分比
+\text{木星引力相对于飞船推力的影响百分比:}
+\begin{equation*}
+P_{\text{jupiter, thrust}} = \frac{F_{\text{jupiter}}}{T} \times 100\% = \frac{0.001}{7500} \times 100\% \approx 0.000013\%
+\end{equation*}
 
-\[
-\text{木星引力相对于月球引力的影响百分比} = \frac{F_{\text{jupiter}}}{F_{\text{moon}}} \times 100\% = \frac{0.001}{7685.18} \times 100\% \approx 0.000013\%
-\]
+% 木星引力相对于月球引力的影响百分比
+\text{木星引力相对于月球引力的影响百分比:}
+\begin{equation*}
+P_{\text{jupiter, moon}} = \frac{F_{\text{jupiter}}}{F_{\text{moon}}} \times 100\% = \frac{0.001}{7685.18} \times 100\% \approx 0.000013\%
+\end{equation*}
 
 因此，太阳引力对飞船推力的相对影响约为 0.38\%，对月球引力的相对影响约为 0.37\%。木星引力对飞船推力和月球引力的相对影响都约为 0.000013\%。
 
@@ -946,6 +999,7 @@ P = \frac{S}{c}
 
 其中：
 \begin{itemize}
+	\renewcommand\labelitemi{} % 去掉项目符号
     \item \( S \) 是太阳常数，约为 \( 1361 \, \text{W/m}^2 \)
     \item \( c \) 是光速，约为 \( 3 \times 10^8 \, \text{m/s} \)
 \end{itemize}
@@ -964,6 +1018,7 @@ F = P \cdot A \cdot Q
 
 其中：
 \begin{itemize}
+	\renewcommand\labelitemi{} % 去掉项目符号
     \item \( P \) 是太阳光压
     \item \( A \) 是航天器的受照面积
 
@@ -1002,6 +1057,7 @@ F_d = \frac{1}{2} C_d \rho v^2 A
 
 其中：
 \begin{itemize}
+	\renewcommand\labelitemi{} % 去掉项目符号
     \item \( C_d \) 是阻力系数，假设为 2.2，为粗糙球体的典型值
     \item \( \rho \) 是大气密度，假设为非常稀薄的 \( 1 \times 10^{-12} \, \text{kg/m}^3 \)
     \item \( v \) 是着陆器的速度，假设为 \( 100 \, \text{m/s} \)
@@ -1059,13 +1115,14 @@ F_{\text{moon}} \approx 7685.18 \, \text{N}
 
 摄动引力 \( \delta F_{\text{moon}} \approx 76.85 \, \text{N} \)，与其他引力相比，我们可以评估其相对影响：
 \begin{itemize}
+	\renewcommand\labelitemi{} % 去掉项目符号
     \item 相对于飞船推力的影响：
     \[
     \text{Relative Influence of Perturbation} = \frac{\delta F_{\text{moon}}}{7500} \times 100\% = \frac{76.85}{7500} \times 100\% \approx 1.02\%
     \]
     \item 相对于标准月球引力的影响：
     \[
-    \text{Relative Influence of Perturbation with respect to Moon Gravity} = \frac{\delta F_{\text{moon}}}{F_{\text{moon}}} \times 100\% = \frac{76.85}{7685.18} \times 100\% \approx 1.00\%
+    \text{Relative Influence of Moon Gravity} = \frac{\delta F_{\text{moon}}}{F_{\text{moon}}} \times 100\% = \frac{76.85}{7685.18} \times 100\% \approx 1.00\%
     \]
 \end{itemize}
 
@@ -1111,19 +1168,32 @@ F_{\text{rel}} \approx F_{\text{moon}} \times \Delta \phi \approx 7685.18 \times
 \]
 
 综合对比如下：
-\begin{itemize}
-    \item 推进器推力： \( T = 7500 \, \text{N} \)
-    \item 月球引力： \( F_{\text{moon}} \approx 7685.18 \, \text{N} \)
-    \item 质量瘤引力变化： \( \delta F_{\text{moon}} \approx 76.85 \, \text{N} \)
-    \item 太阳引力： \( F_{\text{sun}} \approx 28.45 \, \text{N} \)
-    \item 地球引力： \( F_{\text{earth}} \approx 13.08 \, \text{N} \)
-    \item 木星引力： \( F_{\text{jupiter}} \approx 0.001 \, \text{N} \)
-    \item 大气阻力： \( F_d \approx 1.1 \times 10^{-7} \, \text{N} \)
-    \item 相对论效应引力： \( F_{\text{rel}} \approx 6.12 \times 10^{-8} \, \text{N} \)
-    \item 固体潮引力： \( F_{\text{tide, effective}} \approx 4.651 \times 10^{-9} \, \text{N} \)
 
-\end{itemize}
+\begin{table}[h]
+    \centering
+    \caption{各类引力及推力参数对比表}
+    \setlength{\tabcolsep}{12mm} % 调整列间距
+    \renewcommand{\arraystretch}{1.5} % 调整行间距
+    \begin{tabular}{lc}
+        \specialrule{1.2pt}{0pt}{0pt} % 设置顶部粗线
+        \textbf{参数} & \textbf{值} \\
+        \midrule  % 设置中间横线
+        推进器推力 & \( T = 7500 \, \text{N} \) \\
+        月球引力 & \( F_{\text{moon}} \approx 7685.18 \, \text{N} \) \\
+        质量瘤引力变化 & \( \delta F_{\text{moon}} \approx 76.85 \, \text{N} \) \\
+        太阳引力 & \( F_{\text{sun}} \approx 28.45 \, \text{N} \) \\
+        地球引力 & \( F_{\text{earth}} \approx 13.08 \, \text{N} \) \\
+        木星引力 & \( F_{\text{jupiter}} \approx 0.001 \, \text{N} \) \\
+        大气阻力 & \( F_d \approx 1.1 \times 10^{-7} \, \text{N} \) \\
+        相对论效应引力 & \( F_{\text{rel}} \approx 6.12 \times 10^{-8} \, \text{N} \) \\
+        固体潮引力 & \( F_{\text{tide, effective}} \approx 4.651 \times 10^{-9} \, \text{N} \) \\
+        \specialrule{1.2pt}{0pt}{0pt} % 设置底部粗线
+    \end{tabular}
+\end{table}
 
+月球引力是飞船在月球附近飞行时主要的引力，但由于质量瘤的存在，会有一定的变化。
+太阳引力和地球引力在远离它们时对飞船的影响较小。
+木星引力、大气阻力、相对论效应引力和固体潮引力的影响可以忽略不计，但在精密计算时仍需考虑。
 
 \subsubsection{求解精度影响}
 问题来自于差分方程的迭代精度。
@@ -1194,16 +1264,16 @@ y_{n+1} = y_n + \frac{1}{6} (k_1 + 2k_2 + 2k_3 + k_4)
 \]
 
 \subsubsection{蒙特卡洛算法}
-蒙特卡罗方法是一种通过随机采样进行数值积分和计算的方法。
+蒙特卡罗方法是一种通过随机采样进行数值积分和计算的方法。在此通过对着陆点进行多次随机模拟，利用统计结果来研究模型灵敏度。
 
     \begin{figure}[H] % [H] 表示强制当前位置插入图片
         \centering % 使图片居中
-        \includegraphics[width=0.6\textwidth]{"./picture/Figure_100.png"} % 图片文件名及宽度调整
+        \includegraphics[width=0.9\textwidth]{"./picture/Figure_100.png"} % 图片文件名及宽度调整
         \caption{A区未去重结果图} % 图片标题
         \label{fig:example} % 图片标签
     \end{figure}
 
-由此可见落点会随着初状态的改变而发生改变。
+由此可见落点会随着初状态的改变而发生改变，但是落点始终集中于一定范围内，进而验证了落点选取的准确性。
 
 \subsubsection{小结}
 
